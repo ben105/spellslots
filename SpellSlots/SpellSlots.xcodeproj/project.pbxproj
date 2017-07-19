@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		63C0300A1F1ED7110033F74D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C030091F1ED7110033F74D /* AppDelegate.swift */; };
 		63C0300C1F1ED7110033F74D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C0300B1F1ED7110033F74D /* ViewController.swift */; };
-		63C0300F1F1ED7110033F74D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63C0300D1F1ED7110033F74D /* Main.storyboard */; };
 		63C030111F1ED7110033F74D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63C030101F1ED7110033F74D /* Assets.xcassets */; };
 		63C030141F1ED7110033F74D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63C030121F1ED7110033F74D /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -18,7 +17,6 @@
 		63C030061F1ED7110033F74D /* SpellSlots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpellSlots.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C030091F1ED7110033F74D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63C0300B1F1ED7110033F74D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		63C0300E1F1ED7110033F74D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		63C030101F1ED7110033F74D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63C030131F1ED7110033F74D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63C030151F1ED7110033F74D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,7 +54,6 @@
 			children = (
 				63C030091F1ED7110033F74D /* AppDelegate.swift */,
 				63C0300B1F1ED7110033F74D /* ViewController.swift */,
-				63C0300D1F1ED7110033F74D /* Main.storyboard */,
 				63C030101F1ED7110033F74D /* Assets.xcassets */,
 				63C030121F1ED7110033F74D /* LaunchScreen.storyboard */,
 				63C030151F1ED7110033F74D /* Info.plist */,
@@ -126,7 +123,6 @@
 			files = (
 				63C030141F1ED7110033F74D /* LaunchScreen.storyboard in Resources */,
 				63C030111F1ED7110033F74D /* Assets.xcassets in Resources */,
-				63C0300F1F1ED7110033F74D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,14 +141,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		63C0300D1F1ED7110033F74D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				63C0300E1F1ED7110033F74D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		63C030121F1ED7110033F74D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -263,10 +251,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8YYL9QSAXT;
 				INFOPLIST_FILE = SpellSlots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = benrooke.SpellSlots;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -276,10 +266,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8YYL9QSAXT;
 				INFOPLIST_FILE = SpellSlots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = benrooke.SpellSlots;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -302,6 +294,7 @@
 				63C0301A1F1ED7110033F74D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
