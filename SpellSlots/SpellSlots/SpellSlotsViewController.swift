@@ -11,7 +11,6 @@ import UIKit
 class SpellSlotsViewController: UIViewController {
 
   static let CellReuseIdentifier: String = "CellIdentifier"
-  static let CellHeight: CGFloat = 60.0
 
   // TODO: Update the row data (String value is just for testing).
   var rowData: [String] = ["Spell Points", "Level 1", "Level 2"]
@@ -47,7 +46,7 @@ class SpellSlotsViewController: UIViewController {
 extension SpellSlotsViewController: UITableViewDelegate {
 
   public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return SpellSlotsViewController.CellHeight
+    return SpellSlotTableViewCell.CellHeight
   }
 
   public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -66,12 +65,12 @@ extension SpellSlotsViewController: UITableViewDataSource {
     _ tableView: UITableView,
     cellForRowAt indexPath: IndexPath) -> UITableViewCell
   {
-    var cell:UITableViewCell? = tableView.dequeueReusableCell(
-      withIdentifier: SpellSlotsViewController.CellReuseIdentifier)
+    var cell: SpellSlotTableViewCell? = tableView.dequeueReusableCell(
+      withIdentifier: SpellSlotsViewController.CellReuseIdentifier) as? SpellSlotTableViewCell
 
     if (cell == nil) {
-      cell = UITableViewCell(
-        style: UITableViewCellStyle.default,
+      cell = SpellSlotTableViewCell(
+        numberOfSlots: 4, // TODO: Pull the number of slots from the row data.
         reuseIdentifier: SpellSlotsViewController.CellReuseIdentifier)
     }
 

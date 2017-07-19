@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		636672C81F1F111D00CD3D83 /* SpellSlotTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636672C71F1F111D00CD3D83 /* SpellSlotTableViewCell.swift */; };
+		63866E491F1F2B300048232B /* SpellSlotsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63866E481F1F2B300048232B /* SpellSlotsCollectionViewCell.swift */; };
 		63C0300A1F1ED7110033F74D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C030091F1ED7110033F74D /* AppDelegate.swift */; };
 		63C0300C1F1ED7110033F74D /* SpellSlotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C0300B1F1ED7110033F74D /* SpellSlotsViewController.swift */; };
 		63C030111F1ED7110033F74D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63C030101F1ED7110033F74D /* Assets.xcassets */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		636672C71F1F111D00CD3D83 /* SpellSlotTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpellSlotTableViewCell.swift; sourceTree = "<group>"; };
+		63866E481F1F2B300048232B /* SpellSlotsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpellSlotsCollectionViewCell.swift; sourceTree = "<group>"; };
 		63C030061F1ED7110033F74D /* SpellSlots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpellSlots.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C030091F1ED7110033F74D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63C0300B1F1ED7110033F74D /* SpellSlotsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpellSlotsViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +58,8 @@
 			children = (
 				63C030091F1ED7110033F74D /* AppDelegate.swift */,
 				63C0300B1F1ED7110033F74D /* SpellSlotsViewController.swift */,
+				636672C71F1F111D00CD3D83 /* SpellSlotTableViewCell.swift */,
+				63866E481F1F2B300048232B /* SpellSlotsCollectionViewCell.swift */,
 				63C030101F1ED7110033F74D /* Assets.xcassets */,
 				63C030121F1ED7110033F74D /* LaunchScreen.storyboard */,
 				63C030151F1ED7110033F74D /* Info.plist */,
@@ -134,6 +140,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				63C0300C1F1ED7110033F74D /* SpellSlotsViewController.swift in Sources */,
+				63866E491F1F2B300048232B /* SpellSlotsCollectionViewCell.swift in Sources */,
+				636672C81F1F111D00CD3D83 /* SpellSlotTableViewCell.swift in Sources */,
 				63C0300A1F1ED7110033F74D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
