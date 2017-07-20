@@ -96,7 +96,7 @@ extension SpellSlotTableViewCell: UICollectionViewDataSource {
       withReuseIdentifier: SpellSlotTableViewCell.CollectionCellIdentifier,
       for: indexPath)
     // TODO: Configure the cell
-    cell.backgroundColor = UIColor.black
+//    cell.backgroundColor = UIColor.black
     return cell
   }
 

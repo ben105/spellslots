@@ -17,6 +17,7 @@ class SpellSlotsViewController: UIViewController {
 
   var tableView: UITableView = {
     let tv = UITableView()
+    tv.allowsSelection = false
     tv.translatesAutoresizingMaskIntoConstraints = false
     return tv
   }()
@@ -78,4 +79,3 @@ extension SpellSlotsViewController: UITableViewDataSource {
     return cell!
   }
 }
-
