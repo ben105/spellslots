@@ -14,12 +14,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
 
 
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+  func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
+  {
 
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.backgroundColor = UIColor.black
     window?.makeKeyAndVisible()
-    window?.rootViewController = SpellSlotsViewController()
+    window?.rootViewController = UINavigationController(
+      rootViewController: SpellSlotsViewController())
+
+    // Edit the navigation bar so that it's red, and set the title color to white.
+    UINavigationBar.appearance().barTintColor = UIColor(
+      red: 220.0/255.0, green: 64.0/255.0, blue: 49.0/255.0, alpha: 1)
+    UINavigationBar.appearance().titleTextAttributes =
+      [NSForegroundColorAttributeName: UIColor.white]
 
     return true
   }

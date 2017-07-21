@@ -37,6 +37,7 @@ class SpellSlotsViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.title = "Spell Slots"
     view.addSubview(tableView)
   }
 
