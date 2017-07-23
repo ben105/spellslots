@@ -13,6 +13,7 @@ class SpellSlotsViewController: UIViewController {
   // TODO: Toggle with edit button
   var editMode: Bool = false {
     didSet {
+      isEditing = editMode
       tableView.reloadData()
     }
   }
@@ -46,6 +47,15 @@ class SpellSlotsViewController: UIViewController {
     super.viewDidLoad()
     self.title = "Spell Slots"
     view.addSubview(tableView)
+
+    // Add the edit button to the top nav bar.
+    editButtonItem.action = #selector(toggleEditMode(sender:))
+    editButtonItem.tintColor = UIColor.white
+    navigationItem.rightBarButtonItem = editButtonItem
+  }
+
+  @objc fileprivate func toggleEditMode(sender: AnyObject) {
+    editMode = !editMode
   }
 
 }
@@ -88,6 +98,7 @@ extension SpellSlotsViewController: UITableViewDataSource {
         reuseIdentifier: SpellSlotsTableViewCell.CellReuseIdentifier)
     }
 
+    cell!.editMode = editMode
     cell!.textLabel!.text = rowData[indexPath.row]
     return cell!
   }
@@ -123,7 +134,6 @@ extension SpellSlotsViewController: UITableViewDataSource {
       cell = addRowCell(forTableView: tableView)
     } else {
       cell = self.tableView(tableView, slotsForIndexPath: indexPath)
-      (cell as! SpellSlotsTableViewCell).editMode = editMode
     }
     return cell
   }

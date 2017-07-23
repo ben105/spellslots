@@ -10,6 +10,7 @@ class SpellSlotsTableViewCell: UITableViewCell {
 
   var editMode: Bool = false {
     didSet {
+      collectionView.reloadData()
       collectionViewModel.editMode = editMode
     }
   }
