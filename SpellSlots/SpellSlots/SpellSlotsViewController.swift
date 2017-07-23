@@ -45,10 +45,21 @@ class SpellSlotsViewController: UIViewController {
 
 }
 
+extension SpellSlotsViewController: AddRowTableViewCellDelegate {
+  public func didTouchAddRow() {
+    // TODO: Make this more detailed as the row data becomes more complex.
+    rowData.append("Newest row")
+    tableView.reloadData()
+  }
+}
+
 extension SpellSlotsViewController: UITableViewDelegate {
 
   public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return TableViewCell.CellHeight
+    if indexPath.row == rowData.count {
+      return AddRowTableViewCell.CellHeight
+    }
+    return SpellSlotsTableViewCell.CellHeight
   }
 
   public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -61,23 +72,40 @@ extension SpellSlotsViewController: UITableViewDataSource {
 
   fileprivate func tableView(
     _ tableView: UITableView,
-    slotsForIndexPath indexPath: IndexPath) -> TableViewCell
+    slotsForIndexPath indexPath: IndexPath) -> SpellSlotsTableViewCell
   {
-    var cell: TableViewCell? = tableView.dequeueReusableCell(
-      withIdentifier: TableViewCell.CellReuseIdentifier) as? TableViewCell
+    var cell: SpellSlotsTableViewCell? = tableView.dequeueReusableCell(
+      withIdentifier: SpellSlotsTableViewCell.CellReuseIdentifier) as? SpellSlotsTableViewCell
 
     if (cell == nil) {
-      cell = TableViewCell(
+      cell = SpellSlotsTableViewCell(
         numberOfSlots: 4, // TODO: Pull the number of slots from the row data.
-        reuseIdentifier: TableViewCell.CellReuseIdentifier)
+        reuseIdentifier: SpellSlotsTableViewCell.CellReuseIdentifier)
     }
 
     cell!.textLabel!.text = rowData[indexPath.row]
     return cell!
   }
 
+  fileprivate func addRowCell(forTableView tableView: UITableView) -> AddRowTableViewCell {
+    var cell: AddRowTableViewCell? = tableView.dequeueReusableCell(
+      withIdentifier: AddRowTableViewCell.CellReuseIdentifier) as? AddRowTableViewCell
+
+    if (cell == nil) {
+      cell = AddRowTableViewCell(
+        delegate: self,
+        reuseIdentifier: AddRowTableViewCell.CellReuseIdentifier)
+    }
+
+    return cell!
+  }
+
   public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return rowData.count
+    var numberOfRows = rowData.count
+    if editMode {
+      numberOfRows += 1
+    }
+    return numberOfRows
   }
 
   public func tableView(
@@ -85,10 +113,9 @@ extension SpellSlotsViewController: UITableViewDataSource {
     cellForRowAt indexPath: IndexPath) -> UITableViewCell
   {
     var cell: UITableViewCell!
-    if indexPath.row == rowData.count - 1 && editMode {
+    if indexPath.row == rowData.count {
       // If we are loading the last row and we are in edit mode, show the 'ADD ROW' row.
-      // TODO: Instantiate an edit row.
-      cell = UITableViewCell()
+      cell = addRowCell(forTableView: tableView)
     } else {
       cell = self.tableView(tableView, slotsForIndexPath: indexPath)
     }

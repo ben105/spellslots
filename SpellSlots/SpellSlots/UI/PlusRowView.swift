@@ -15,6 +15,7 @@ class PlusRowView: UIControl {
     self.layer.cornerRadius = PlusRowView.Inset
 
     let plusSign = PlusSign()
+    plusSign.translatesAutoresizingMaskIntoConstraints = false
     self.addSubview(plusSign)
     plusSign.leftAnchor.constraint(
       equalTo: self.leftAnchor,
@@ -28,7 +29,11 @@ class PlusRowView: UIControl {
     plusSign.widthAnchor.constraint(equalTo: plusSign.heightAnchor).isActive = true
 
     let label = UILabel()
+    label.translatesAutoresizingMaskIntoConstraints = false
     label.text = "ADD ROW"
+    label.textColor = UIColor.white
+    label.font = UIFont.systemFont(ofSize: 10.0)
+    self.addSubview(label)
     label.leftAnchor.constraint(
       equalTo: plusSign.rightAnchor,
       constant: PlusRowView.Inset).isActive = true

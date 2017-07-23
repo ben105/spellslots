@@ -13,9 +13,11 @@ class PlusSign: UIView {
 
   override init(frame: CGRect) {
     self.horizontalView = UIView()
+    self.horizontalView.translatesAutoresizingMaskIntoConstraints = false
     self.horizontalView.backgroundColor = UIColor.white
 
     self.verticalView = UIView()
+    self.verticalView.translatesAutoresizingMaskIntoConstraints = false
     self.verticalView.backgroundColor = UIColor.white
 
     super.init(frame: frame)

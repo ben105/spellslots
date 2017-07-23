@@ -1,8 +1,8 @@
 import UIKit
 
-class TableViewCell: UITableViewCell {
+class SpellSlotsTableViewCell: UITableViewCell {
 
-  static let CellReuseIdentifier: String = "TableCellIdentifier"
+  static let CellReuseIdentifier: String = "SpellSlotsTableCellIdentifier"
 
   static let CellHeight: CGFloat = 100.0
 
@@ -43,10 +43,10 @@ class TableViewCell: UITableViewCell {
     self.addSubview(self.rowLabel)
     self.rowLabel.leftAnchor.constraint(
       equalTo: self.leftAnchor,
-      constant: TableViewCell.Inset).isActive = true
+      constant: SpellSlotsTableViewCell.Inset).isActive = true
     self.rowLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     self.rowLabel.widthAnchor.constraint(
-      equalToConstant: TableViewCell.LabelWidth).isActive = true
+      equalToConstant: SpellSlotsTableViewCell.LabelWidth).isActive = true
 
     self.collectionView.delegate = self.collectionViewModel
     self.collectionView.dataSource = self.collectionViewModel
@@ -54,16 +54,16 @@ class TableViewCell: UITableViewCell {
     self.addSubview(self.collectionView)
     self.collectionView.leftAnchor.constraint(
       equalTo: self.rowLabel.rightAnchor,
-      constant: TableViewCell.Inset).isActive = true
+      constant: SpellSlotsTableViewCell.Inset).isActive = true
     self.collectionView.rightAnchor.constraint(
       equalTo: self.rightAnchor,
-      constant: -TableViewCell.Inset).isActive = true
+      constant: -SpellSlotsTableViewCell.Inset).isActive = true
     self.collectionView.topAnchor.constraint(
       equalTo: self.topAnchor,
-      constant: TableViewCell.Inset).isActive = true
+      constant: SpellSlotsTableViewCell.Inset).isActive = true
     self.collectionView.bottomAnchor.constraint(
       equalTo: self.bottomAnchor,
-      constant: -TableViewCell.Inset).isActive = true
+      constant: -SpellSlotsTableViewCell.Inset).isActive = true
   }
   
   required init?(coder aDecoder: NSCoder) {
