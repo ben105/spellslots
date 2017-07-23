@@ -10,8 +10,10 @@ import UIKit
 
 class SpellSlotsViewController: UIViewController {
 
+  var editMode: Bool = false // TODO: Toggle with edit button
+
   // TODO: Update the row data (String value is just for testing).
-  var rowData: [String] = ["Spell Points", "Level 1", "Level 2"]
+  var rowData: [String] = ["Row 1", "Row 2", "Row 3"]
 
   var tableView: UITableView = {
     let tv = UITableView()
@@ -57,13 +59,9 @@ extension SpellSlotsViewController: UITableViewDelegate {
 
 extension SpellSlotsViewController: UITableViewDataSource {
 
-  public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return rowData.count
-  }
-
-  public func tableView(
+  fileprivate func tableView(
     _ tableView: UITableView,
-    cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    slotsForIndexPath indexPath: IndexPath) -> TableViewCell
   {
     var cell: TableViewCell? = tableView.dequeueReusableCell(
       withIdentifier: TableViewCell.CellReuseIdentifier) as? TableViewCell
@@ -76,5 +74,24 @@ extension SpellSlotsViewController: UITableViewDataSource {
 
     cell!.textLabel!.text = rowData[indexPath.row]
     return cell!
+  }
+
+  public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return rowData.count
+  }
+
+  public func tableView(
+    _ tableView: UITableView,
+    cellForRowAt indexPath: IndexPath) -> UITableViewCell
+  {
+    var cell: UITableViewCell!
+    if indexPath.row == rowData.count - 1 && editMode {
+      // If we are loading the last row and we are in edit mode, show the 'ADD ROW' row.
+      // TODO: Instantiate an edit row.
+      cell = UITableViewCell()
+    } else {
+      cell = self.tableView(tableView, slotsForIndexPath: indexPath)
+    }
+    return cell
   }
 }

@@ -26,8 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       rootViewController: SpellSlotsViewController())
 
     // Edit the navigation bar so that it's red, and set the title color to white.
-    UINavigationBar.appearance().barTintColor = UIColor(
-      red: 220.0/255.0, green: 64.0/255.0, blue: 49.0/255.0, alpha: 1)
+    UINavigationBar.appearance().barTintColor = Colors.spellSlotRed
     UINavigationBar.appearance().titleTextAttributes =
       [NSForegroundColorAttributeName: UIColor.white]
 
