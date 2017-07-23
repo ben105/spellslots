@@ -7,6 +7,16 @@ class PlusSign: UIView {
   fileprivate var horizontalView: UIView
   fileprivate var verticalView: UIView
 
+  var color: UIColor {
+    get {
+      return horizontalView.backgroundColor!
+    }
+    set(newColor) {
+      horizontalView.backgroundColor = newColor
+      verticalView.backgroundColor = newColor
+    }
+  }
+
   convenience init() {
     self.init(frame: CGRect())
   }

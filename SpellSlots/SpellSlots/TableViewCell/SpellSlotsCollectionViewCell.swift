@@ -3,44 +3,56 @@ import UIKit
 class SpellSlotsCollectionViewCell: UICollectionViewCell {
 
   static let SpellSlotDiameter: CGFloat = 40.0
+  fileprivate static let Inset: CGFloat = 10.0
 
-  private let buttonColor: UIColor = .darkGray
-
-  override var isSelected: Bool {
+  fileprivate var plusSign: PlusSign = PlusSign()
+  var isPlusCell: Bool = false {
     didSet {
-      self.toggleButton.backgroundColor = isSelected ? self.buttonColor : .white
+      updateView()
     }
   }
 
-  private lazy var toggleButton: UIButton = {
-    let button = UIButton(type: .system)
-    button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
-    button.layer.cornerRadius = SpellSlotsCollectionViewCell.SpellSlotDiameter / 2
-    button.layer.borderColor = self.buttonColor.cgColor
-    button.layer.borderWidth = 1.0
-    button.translatesAutoresizingMaskIntoConstraints = false
-    return button
-  }()
-
   override init(frame: CGRect) {
     super.init(frame: frame)
+    self.backgroundColor = .white
+    self.layer.borderColor = UIColor.black.cgColor
+    self.layer.borderWidth = 1.0
+    self.layer.cornerRadius = SpellSlotsCollectionViewCell.SpellSlotDiameter / 2.0
 
-    self.isSelected = true
-    self.backgroundColor = .clear
-
-    self.addSubview(self.toggleButton)
-    self.toggleButton.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-    self.toggleButton.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-    self.toggleButton.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-    self.toggleButton.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    self.contentView.addSubview(self.plusSign)
+    self.plusSign.translatesAutoresizingMaskIntoConstraints = false
+    self.plusSign.color = Colors.spellSlotRed
+    self.plusSign.leftAnchor.constraint(
+      equalTo: self.contentView.leftAnchor,
+      constant: SpellSlotsCollectionViewCell.Inset).isActive = true
+    self.plusSign.topAnchor.constraint(
+      equalTo: self.contentView.topAnchor,
+      constant: SpellSlotsCollectionViewCell.Inset).isActive = true
+    self.plusSign.bottomAnchor.constraint(
+      equalTo: self.contentView.bottomAnchor,
+      constant: -SpellSlotsCollectionViewCell.Inset).isActive = true
+    self.plusSign.rightAnchor.constraint(
+      equalTo: self.contentView.rightAnchor,
+      constant: -SpellSlotsCollectionViewCell.Inset).isActive = true
   }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
-  @objc private func didTapButton(_ sender: UIButton) {
-    self.isSelected = !self.isSelected
+  fileprivate func updateView() {
+    plusSign.isHidden = !isPlusCell
+    if isPlusCell {
+      deselect()
+    }
+  }
+
+  func select() {
+    self.backgroundColor = Colors.spellSlotRed
+  }
+
+  func deselect() {
+    self.backgroundColor = .white
   }
 
 }
