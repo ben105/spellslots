@@ -8,6 +8,12 @@ class SpellSlotsTableViewCell: UITableViewCell {
 
   fileprivate let collectionViewModel: CollectionViewModel
 
+  var editMode: Bool = false {
+    didSet {
+      collectionViewModel.editMode = editMode
+    }
+  }
+
   fileprivate var collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal

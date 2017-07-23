@@ -16,6 +16,8 @@ class CollectionViewModel:
   /// This represents how many slots have been filled (left to right).
   fileprivate var slotsComplete: UInt = 0
 
+  var editMode: Bool = false
+
   init(numberOfSlots: UInt) {
     self.numberOfSlots = numberOfSlots
     super.init()
@@ -29,7 +31,11 @@ class CollectionViewModel:
     _ collectionView: UICollectionView,
     numberOfItemsInSection section: Int) -> Int
   {
-    return Int(numberOfSlots)
+    var numberOfItems = Int(numberOfSlots)
+    if editMode {
+      numberOfItems += 1
+    }
+    return numberOfItems
   }
 
 

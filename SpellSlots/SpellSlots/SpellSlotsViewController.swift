@@ -10,7 +10,12 @@ import UIKit
 
 class SpellSlotsViewController: UIViewController {
 
-  var editMode: Bool = false // TODO: Toggle with edit button
+  // TODO: Toggle with edit button
+  var editMode: Bool = false {
+    didSet {
+      tableView.reloadData()
+    }
+  }
 
   // TODO: Update the row data (String value is just for testing).
   var rowData: [String] = ["Row 1", "Row 2", "Row 3"]
@@ -118,6 +123,7 @@ extension SpellSlotsViewController: UITableViewDataSource {
       cell = addRowCell(forTableView: tableView)
     } else {
       cell = self.tableView(tableView, slotsForIndexPath: indexPath)
+      (cell as! SpellSlotsTableViewCell).editMode = editMode
     }
     return cell
   }
