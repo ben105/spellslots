@@ -39,5 +39,19 @@ extension SpellSlotsViewController: SpellSlotsCellDelegate {
     }
     rowEntries[indexPath.row].title = toTitle
   }
-  
+
+  func spellSlotsCell(cell: SpellSlotsTableViewCell, changedTotalSlots toSlots: UInt) {
+    guard let indexPath = tableView.indexPath(for: cell) else {
+      return
+    }
+    rowEntries[indexPath.row].totalSlots = toSlots
+  }
+
+  func spellSlotsCell(cell: SpellSlotsTableViewCell, changedCompletedSlots toSlots: UInt) {
+    guard let indexPath = tableView.indexPath(for: cell) else {
+      return
+    }
+    rowEntries[indexPath.row].completedSlots = toSlots
+  }
+
 }

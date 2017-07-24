@@ -1,5 +1,10 @@
 import UIKit
 
+protocol CollectionViewModelDelegate: class {
+  func didChangeTotalSlots(toSlots: UInt)
+  func didChangeCompletedSlots(toSlots: UInt)
+}
+
 /// The collection view model keeps the collection view logic from the table view cell. This logic
 /// could be interchangable in the future.
 class CollectionViewModel:
@@ -10,11 +15,13 @@ class CollectionViewModel:
 
   static let CollectionCellIdentifier: String = "CollectionCellIdentifier"
 
+  weak var delegate: CollectionViewModelDelegate?
+
   /// This represents how many slots can possibly be filled.
   fileprivate var numberOfSlots: UInt
 
   /// This represents the index of the furthest most completed slot.
-  fileprivate var slotCompleteIndex: Int = 0
+  var slotCompleteIndex: Int = 0
 
   var editMode: Bool = false {
     didSet {
@@ -80,6 +87,7 @@ class CollectionViewModel:
     // Touching the cell at this index path row means the user is touching the plus button.
     if indexPath.row == Int(numberOfSlots) {
       numberOfSlots += 1
+      delegate?.didChangeTotalSlots(toSlots: numberOfSlots)
       collectionView.reloadData()
       return
     }
@@ -87,6 +95,7 @@ class CollectionViewModel:
     // Touching on a plain cell while in edit mode will shrink the row back down to that point.
     if editMode {
       numberOfSlots = UInt(indexPath.row)
+      delegate?.didChangeTotalSlots(toSlots: numberOfSlots)
       if slotCompleteIndex >= indexPath.row {
         slotCompleteIndex = indexPath.row - 1
       }
@@ -100,6 +109,7 @@ class CollectionViewModel:
     } else {
       slotCompleteIndex = indexPath.row
     }
+    delegate?.didChangeCompletedSlots(toSlots: UInt(slotCompleteIndex + 1))
     collectionView.reloadData()
   }
 }

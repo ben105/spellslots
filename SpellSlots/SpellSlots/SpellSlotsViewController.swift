@@ -89,14 +89,17 @@ extension SpellSlotsViewController: UITableViewDataSource {
     var cell: SpellSlotsTableViewCell? = tableView.dequeueReusableCell(
       withIdentifier: SpellSlotsTableViewCell.CellReuseIdentifier) as? SpellSlotsTableViewCell
 
+    let rowEntry = rowEntries[indexPath.row]
+
     if (cell == nil) {
       cell = SpellSlotsTableViewCell(
-        numberOfSlots: 4, // TODO: Pull the number of slots from the row data.
+        numberOfSlots: rowEntry.totalSlots,
         reuseIdentifier: SpellSlotsTableViewCell.CellReuseIdentifier)
     }
 
     cell!.editMode = editMode
-    cell!.rowLabel.text = rowEntries[indexPath.row].title
+    cell!.rowLabel.text = rowEntry.title
+    cell!.completedSlots = rowEntry.completedSlots
     cell!.delegate = self
     return cell!
   }

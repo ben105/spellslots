@@ -7,6 +7,8 @@ protocol SpellSlotsCellDelegate: class {
     yDistance: CGFloat)
   func headsDown(animationDuration duration: Double, animationCurve curve: UIViewAnimationCurve)
   func spellSlotsCell(cell: SpellSlotsTableViewCell, didChangeTitle toTitle: String)
+  func spellSlotsCell(cell: SpellSlotsTableViewCell, changedTotalSlots toSlots: UInt)
+  func spellSlotsCell(cell: SpellSlotsTableViewCell, changedCompletedSlots toSlots: UInt)
 }
 
 class SpellSlotsTableViewCell: UITableViewCell {
@@ -16,6 +18,14 @@ class SpellSlotsTableViewCell: UITableViewCell {
   static let CellHeight: CGFloat = 100.0
 
   fileprivate let collectionViewModel: CollectionViewModel
+  var completedSlots: UInt {
+    get {
+      return UInt(collectionViewModel.slotCompleteIndex + 1)
+    }
+    set(newValue) {
+      collectionViewModel.slotCompleteIndex = Int(newValue) - 1
+    }
+  }
 
   weak var delegate: SpellSlotsCellDelegate?
 
@@ -74,6 +84,8 @@ class SpellSlotsTableViewCell: UITableViewCell {
   init(numberOfSlots: UInt, reuseIdentifier: String?) {
     self.collectionViewModel = CollectionViewModel(numberOfSlots: numberOfSlots)
     super.init(style: .default, reuseIdentifier: reuseIdentifier)
+
+    self.collectionViewModel.delegate = self
 
     // Hide the text label that would be displayed otherwise.
     self.textLabel?.isHidden = true
@@ -186,6 +198,18 @@ extension SpellSlotsTableViewCell {
 
     rowTextField.isHidden = true
     rowTextField.resignFirstResponder()
+  }
+
+}
+
+extension SpellSlotsTableViewCell: CollectionViewModelDelegate {
+
+  func didChangeTotalSlots(toSlots: UInt) {
+    delegate?.spellSlotsCell(cell: self, changedTotalSlots: toSlots)
+  }
+
+  func didChangeCompletedSlots(toSlots: UInt) {
+    delegate?.spellSlotsCell(cell: self, changedCompletedSlots: toSlots)
   }
 
 }
