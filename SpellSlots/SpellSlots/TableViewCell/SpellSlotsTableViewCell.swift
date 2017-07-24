@@ -1,5 +1,14 @@
 import UIKit
 
+protocol SpellSlotsCellDelegate: class {
+  func headsUpSpellSlotsCell(cell: SpellSlotsTableViewCell,
+    animationDuration duration: Double,
+    animationCurve curve: UIViewAnimationCurve,
+    yDistance: CGFloat)
+  func headsDown(animationDuration duration: Double, animationCurve curve: UIViewAnimationCurve)
+  func spellSlotsCell(cell: SpellSlotsTableViewCell, didChangeTitle toTitle: String)
+}
+
 class SpellSlotsTableViewCell: UITableViewCell {
 
   static let CellReuseIdentifier: String = "SpellSlotsTableCellIdentifier"
@@ -8,12 +17,35 @@ class SpellSlotsTableViewCell: UITableViewCell {
 
   fileprivate let collectionViewModel: CollectionViewModel
 
+  weak var delegate: SpellSlotsCellDelegate?
+
   var editMode: Bool = false {
     didSet {
       collectionView.reloadData()
       collectionViewModel.editMode = editMode
+
+      // Some UI changes for the editMode state:
+      editTitleControl.isHidden = !editMode
+      editTitleControl.isEnabled = editMode
+      if !editMode { disableTitleEdit() }
     }
   }
+
+  fileprivate var editTitleControl: UIControl = {
+    let control = UIControl()
+    control.isHidden = true
+    control.isEnabled = false
+    control.translatesAutoresizingMaskIntoConstraints = false
+    return control
+  }()
+
+  fileprivate var rowTextField: UITextField = {
+    let textField = UITextField()
+    textField.isHidden = true
+    textField.returnKeyType = .done
+    textField.translatesAutoresizingMaskIntoConstraints = false
+    return textField
+  }()
 
   fileprivate var collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
@@ -44,7 +76,7 @@ class SpellSlotsTableViewCell: UITableViewCell {
     super.init(style: .default, reuseIdentifier: reuseIdentifier)
 
     // Hide the text label that would be displayed otherwise.
-    self.textLabel?.isHidden = false
+    self.textLabel?.isHidden = true
 
     // And show the row label instead of the text label.
     self.addSubview(self.rowLabel)
@@ -54,6 +86,24 @@ class SpellSlotsTableViewCell: UITableViewCell {
     self.rowLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     self.rowLabel.widthAnchor.constraint(
       equalToConstant: SpellSlotsTableViewCell.LabelWidth).isActive = true
+
+    // Add the text field (invisible at first).
+    self.addSubview(self.rowTextField)
+    self.rowTextField.addTarget(self, action: #selector(disableTitleEdit), for: .editingDidEnd)
+    self.rowTextField.leftAnchor.constraint(equalTo: self.rowLabel.leftAnchor).isActive = true
+    self.rowTextField.rightAnchor.constraint(equalTo: self.rowLabel.rightAnchor).isActive = true
+    self.rowTextField.topAnchor.constraint(equalTo: self.rowLabel.topAnchor).isActive = true
+    self.rowTextField.bottomAnchor.constraint(
+      equalTo: self.rowLabel.bottomAnchor).isActive = true
+
+    // Add the edit title control above the row label (but it is hidden by default).
+    self.editTitleControl.addTarget(self, action: #selector(enableTitleEdit), for: .touchUpInside)
+    self.addSubview(self.editTitleControl)
+    self.editTitleControl.leftAnchor.constraint(equalTo: self.rowLabel.leftAnchor).isActive = true
+    self.editTitleControl.rightAnchor.constraint(equalTo: self.rowLabel.rightAnchor).isActive = true
+    self.editTitleControl.topAnchor.constraint(equalTo: self.rowLabel.topAnchor).isActive = true
+    self.editTitleControl.bottomAnchor.constraint(
+      equalTo: self.rowLabel.bottomAnchor).isActive = true
 
     self.collectionView.delegate = self.collectionViewModel
     self.collectionView.dataSource = self.collectionViewModel
@@ -71,9 +121,71 @@ class SpellSlotsTableViewCell: UITableViewCell {
     self.collectionView.bottomAnchor.constraint(
       equalTo: self.bottomAnchor,
       constant: -SpellSlotsTableViewCell.Inset).isActive = true
+
+    // Disable edit when the keyboard is dismissed (e.g. another title is selected).
+    NotificationCenter.default.addObserver(
+      forName: .UITextFieldTextDidEndEditing,
+      object: self.rowTextField,
+      queue: OperationQueue.main) {
+        (_) in
+        self.disableTitleEdit()
+      }
+
+    NotificationCenter.default.addObserver(
+      forName: .UIKeyboardWillShow,
+      object: nil,
+      queue: OperationQueue.main) {
+        (notification) in
+        let info = KeyboardNotification(notification)
+        self.delegate?.headsUpSpellSlotsCell(
+          cell: self,
+          animationDuration: info.animationDuration,
+          animationCurve: info.animationCurve,
+          yDistance: info.screenFrameEnd.size.height)
+      }
+
+    NotificationCenter.default.addObserver(
+      forName: .UIKeyboardWillHide,
+      object: nil,
+      queue: OperationQueue.main) {
+        (notification) in
+        let info = KeyboardNotification(notification)
+        self.delegate?.headsDown(
+          animationDuration: info.animationDuration,
+          animationCurve: info.animationCurve)
+    }
   }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
+}
+
+// This extension enables the user to edit the row title.
+extension SpellSlotsTableViewCell {
+
+  @objc fileprivate func enableTitleEdit() {
+    rowLabel.isHidden = true
+    editTitleControl.isHidden = true
+
+    rowTextField.text = rowLabel.text
+    rowTextField.isHidden = false
+    rowTextField.becomeFirstResponder()
+  }
+
+  @objc fileprivate func disableTitleEdit() {
+    rowLabel.text = rowTextField.text
+    delegate?.spellSlotsCell(cell: self, didChangeTitle: rowLabel.text!)
+
+    rowLabel.isHidden = false
+    editTitleControl.isHidden = false
+
+    rowTextField.isHidden = true
+    rowTextField.resignFirstResponder()
+  }
+
 }

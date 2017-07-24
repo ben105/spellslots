@@ -99,7 +99,8 @@ extension SpellSlotsViewController: UITableViewDataSource {
     }
 
     cell!.editMode = editMode
-    cell!.textLabel!.text = rowData[indexPath.row]
+    cell!.rowLabel.text = rowData[indexPath.row]
+    cell!.delegate = self
     return cell!
   }
 

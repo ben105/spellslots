@@ -77,12 +77,24 @@ class CollectionViewModel:
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     collectionView.deselectItem(at: indexPath, animated: true)
 
+    // Touching the cell at this index path row means the user is touching the plus button.
     if indexPath.row == Int(numberOfSlots) {
       numberOfSlots += 1
       collectionView.reloadData()
       return
     }
 
+    // Touching on a plain cell while in edit mode will shrink the row back down to that point.
+    if editMode {
+      numberOfSlots = UInt(indexPath.row)
+      if slotCompleteIndex >= indexPath.row {
+        slotCompleteIndex = indexPath.row - 1
+      }
+      collectionView.reloadData()
+      return
+    }
+
+    // Normal behavior of touching a cell.
     if indexPath.row == slotCompleteIndex {
       slotCompleteIndex = indexPath.row - 1
     } else {

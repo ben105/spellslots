@@ -14,6 +14,8 @@
 		6315A2ED1F21DBFE00A673F6 /* PlusRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6315A2EC1F21DBFE00A673F6 /* PlusRowView.swift */; };
 		6315A30D1F2428F600A673F6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6315A30C1F2428F600A673F6 /* Colors.swift */; };
 		6315A30F1F242D7D00A673F6 /* AddRowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6315A30E1F242D7D00A673F6 /* AddRowTableViewCell.swift */; };
+		6315A3131F25757D00A673F6 /* SpellSlotsCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6315A3121F25757D00A673F6 /* SpellSlotsCellDelegate.swift */; };
+		6315A3161F25777800A673F6 /* KeyboardNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6315A3151F25777800A673F6 /* KeyboardNotification.swift */; };
 		63C0300A1F1ED7110033F74D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C030091F1ED7110033F74D /* AppDelegate.swift */; };
 		63C0300C1F1ED7110033F74D /* SpellSlotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C0300B1F1ED7110033F74D /* SpellSlotsViewController.swift */; };
 		63C030111F1ED7110033F74D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63C030101F1ED7110033F74D /* Assets.xcassets */; };
@@ -28,6 +30,8 @@
 		6315A2EC1F21DBFE00A673F6 /* PlusRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlusRowView.swift; sourceTree = "<group>"; };
 		6315A30C1F2428F600A673F6 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		6315A30E1F242D7D00A673F6 /* AddRowTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRowTableViewCell.swift; sourceTree = "<group>"; };
+		6315A3121F25757D00A673F6 /* SpellSlotsCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpellSlotsCellDelegate.swift; sourceTree = "<group>"; };
+		6315A3151F25777800A673F6 /* KeyboardNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardNotification.swift; sourceTree = "<group>"; };
 		63C030061F1ED7110033F74D /* SpellSlots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpellSlots.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C030091F1ED7110033F74D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63C0300B1F1ED7110033F74D /* SpellSlotsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpellSlotsViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +72,14 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		6315A3141F25776D00A673F6 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				6315A3151F25777800A673F6 /* KeyboardNotification.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		63C02FFD1F1ED7110033F74D = {
 			isa = PBXGroup;
 			children = (
@@ -87,10 +99,12 @@
 		63C030081F1ED7110033F74D /* SpellSlots */ = {
 			isa = PBXGroup;
 			children = (
+				6315A3141F25776D00A673F6 /* Util */,
 				6315A2E91F21D63300A673F6 /* UI */,
 				6315A2E21F21C0B700A673F6 /* TableViewCell */,
 				63C030091F1ED7110033F74D /* AppDelegate.swift */,
 				63C0300B1F1ED7110033F74D /* SpellSlotsViewController.swift */,
+				6315A3121F25757D00A673F6 /* SpellSlotsCellDelegate.swift */,
 				63C030101F1ED7110033F74D /* Assets.xcassets */,
 				63C030121F1ED7110033F74D /* LaunchScreen.storyboard */,
 				63C030151F1ED7110033F74D /* Info.plist */,
@@ -172,6 +186,7 @@
 			files = (
 				6315A2E81F21C0B700A673F6 /* SpellSlotsCollectionViewCell.swift in Sources */,
 				6315A30D1F2428F600A673F6 /* Colors.swift in Sources */,
+				6315A3161F25777800A673F6 /* KeyboardNotification.swift in Sources */,
 				6315A30F1F242D7D00A673F6 /* AddRowTableViewCell.swift in Sources */,
 				6315A2E71F21C0B700A673F6 /* SpellSlotsTableViewCell.swift in Sources */,
 				6315A2EB1F21D64300A673F6 /* PlusSign.swift in Sources */,
@@ -179,6 +194,7 @@
 				63C0300C1F1ED7110033F74D /* SpellSlotsViewController.swift in Sources */,
 				63C0300A1F1ED7110033F74D /* AppDelegate.swift in Sources */,
 				6315A2ED1F21DBFE00A673F6 /* PlusRowView.swift in Sources */,
+				6315A3131F25757D00A673F6 /* SpellSlotsCellDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
