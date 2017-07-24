@@ -15,7 +15,7 @@ class SpellSlotsTableViewCell: UITableViewCell {
 
   static let CellReuseIdentifier: String = "SpellSlotsTableCellIdentifier"
 
-  static let CellHeight: CGFloat = 100.0
+  static let CellHeight: CGFloat = 60.0
 
   fileprivate let collectionViewModel: CollectionViewModel
   var completedSlots: UInt {
@@ -70,13 +70,14 @@ class SpellSlotsTableViewCell: UITableViewCell {
   }()
 
   fileprivate static let Inset: CGFloat = 16.0
-  fileprivate static let LabelWidth: CGFloat = 180.0
+  fileprivate static let LabelWidth: CGFloat = 140.0
 
   /// This label is used instead of the superclass `textLabel` due to the fact that when the cell is
   /// selected, and then deselected, the label is recreated. This removes any anchors or layout
   /// constraints that may have been there before.
   var rowLabel: UILabel = {
     let label = UILabel()
+    label.font = UIFont.systemFont(ofSize: 12.0)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()

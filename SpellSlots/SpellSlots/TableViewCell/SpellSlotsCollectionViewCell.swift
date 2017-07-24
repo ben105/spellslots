@@ -2,8 +2,8 @@ import UIKit
 
 class SpellSlotsCollectionViewCell: UICollectionViewCell {
 
-  static let SpellSlotDiameter: CGFloat = 40.0
-  fileprivate static let Inset: CGFloat = 10.0
+  static let SpellSlotDiameter: CGFloat = 24.0
+  fileprivate static let Inset: CGFloat = 6.0
 
   fileprivate var plusSign: PlusSign = PlusSign()
   var isPlusCell: Bool = false {
@@ -20,6 +20,7 @@ class SpellSlotsCollectionViewCell: UICollectionViewCell {
     self.layer.cornerRadius = SpellSlotsCollectionViewCell.SpellSlotDiameter / 2.0
 
     self.contentView.addSubview(self.plusSign)
+    self.plusSign.barWidth = 2.0
     self.plusSign.translatesAutoresizingMaskIntoConstraints = false
     self.plusSign.color = Colors.spellSlotRed
     self.plusSign.leftAnchor.constraint(

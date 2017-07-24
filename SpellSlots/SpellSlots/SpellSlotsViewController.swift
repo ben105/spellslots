@@ -21,7 +21,6 @@ class SpellSlotsViewController: UIViewController {
 
   var tableView: UITableView = {
     let tv = UITableView()
-    tv.allowsSelection = false
     tv.translatesAutoresizingMaskIntoConstraints = false
     return tv
   }()
@@ -31,6 +30,7 @@ class SpellSlotsViewController: UIViewController {
 
     self.tableView.delegate = self
     self.tableView.dataSource = self
+    self.tableView.separatorStyle = .none
     self.tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
     self.tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
     self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
@@ -75,7 +75,14 @@ extension SpellSlotsViewController: UITableViewDelegate {
   }
 
   public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if indexPath.row == rowEntries.count {
+      didTouchAddRow()
+    }
     tableView.deselectRow(at: indexPath, animated: false)
+  }
+
+  func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+    return indexPath.row == rowEntries.count
   }
 
 }
@@ -97,6 +104,9 @@ extension SpellSlotsViewController: UITableViewDataSource {
         reuseIdentifier: SpellSlotsTableViewCell.CellReuseIdentifier)
     }
 
+    cell!.backgroundColor = .white
+    cell!.contentView.backgroundColor = .white
+
     cell!.editMode = editMode
     cell!.rowLabel.text = rowEntry.title
     cell!.completedSlots = rowEntry.completedSlots
@@ -113,6 +123,9 @@ extension SpellSlotsViewController: UITableViewDataSource {
         delegate: self,
         reuseIdentifier: AddRowTableViewCell.CellReuseIdentifier)
     }
+
+    cell!.backgroundColor = Colors.spellSlotRed
+    cell!.contentView.backgroundColor = Colors.spellSlotRed
 
     return cell!
   }
