@@ -37,7 +37,7 @@ extension SpellSlotsViewController: SpellSlotsCellDelegate {
     guard let indexPath = tableView.indexPath(for: cell) else {
       return
     }
-    rowData[indexPath.row] = toTitle
+    rowEntries[indexPath.row].title = toTitle
   }
   
 }

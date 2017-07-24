@@ -60,7 +60,7 @@ class SpellSlotsTableViewCell: UITableViewCell {
   }()
 
   fileprivate static let Inset: CGFloat = 16.0
-  fileprivate static let LabelWidth: CGFloat = 130.0
+  fileprivate static let LabelWidth: CGFloat = 180.0
 
   /// This label is used instead of the superclass `textLabel` due to the fact that when the cell is
   /// selected, and then deselected, the label is recreated. This removes any anchors or layout

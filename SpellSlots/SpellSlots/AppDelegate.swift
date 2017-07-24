@@ -13,17 +13,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
 
+  var spellSlotsViewController: SpellSlotsViewController?
+
+  fileprivate let rowDataKey = "SpellSlotsRowDataKey"
 
   func application(
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
   {
 
+    spellSlotsViewController = SpellSlotsViewController()
+    if let savedData = UserDefaults.standard.object(forKey: rowDataKey) as? RowDataType {
+      spellSlotsViewController!.rowEntries = createRowEntries(forRowData: savedData)
+    }
+
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.backgroundColor = UIColor.black
     window?.makeKeyAndVisible()
     window?.rootViewController = UINavigationController(
-      rootViewController: SpellSlotsViewController())
+      rootViewController: spellSlotsViewController!)
 
     // Edit the navigation bar so that it's red, and set the title color to white.
     UINavigationBar.appearance().barTintColor = Colors.spellSlotRed
@@ -53,6 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func applicationWillTerminate(_ application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    let rowData = createRowData(forRowEntries: spellSlotsViewController!.rowEntries)
+    UserDefaults.standard.set(rowData, forKey: rowDataKey)
   }
 
 

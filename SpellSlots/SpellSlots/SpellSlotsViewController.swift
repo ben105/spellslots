@@ -10,7 +10,6 @@ import UIKit
 
 class SpellSlotsViewController: UIViewController {
 
-  // TODO: Toggle with edit button
   var editMode: Bool = false {
     didSet {
       isEditing = editMode
@@ -18,8 +17,7 @@ class SpellSlotsViewController: UIViewController {
     }
   }
 
-  // TODO: Update the row data (String value is just for testing).
-  var rowData: [String] = ["Row 1", "Row 2", "Row 3"]
+  var rowEntries: [RowEntry] = []
 
   var tableView: UITableView = {
     let tv = UITableView()
@@ -62,8 +60,7 @@ class SpellSlotsViewController: UIViewController {
 
 extension SpellSlotsViewController: AddRowTableViewCellDelegate {
   public func didTouchAddRow() {
-    // TODO: Make this more detailed as the row data becomes more complex.
-    rowData.append("Newest row")
+    rowEntries.append(RowEntry(completed: 0, total: 0))
     tableView.reloadData()
   }
 }
@@ -71,7 +68,7 @@ extension SpellSlotsViewController: AddRowTableViewCellDelegate {
 extension SpellSlotsViewController: UITableViewDelegate {
 
   public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    if indexPath.row == rowData.count {
+    if indexPath.row == rowEntries.count {
       return AddRowTableViewCell.CellHeight
     }
     return SpellSlotsTableViewCell.CellHeight
@@ -99,7 +96,7 @@ extension SpellSlotsViewController: UITableViewDataSource {
     }
 
     cell!.editMode = editMode
-    cell!.rowLabel.text = rowData[indexPath.row]
+    cell!.rowLabel.text = rowEntries[indexPath.row].title
     cell!.delegate = self
     return cell!
   }
@@ -118,7 +115,7 @@ extension SpellSlotsViewController: UITableViewDataSource {
   }
 
   public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    var numberOfRows = rowData.count
+    var numberOfRows = rowEntries.count
     if editMode {
       numberOfRows += 1
     }
@@ -130,7 +127,7 @@ extension SpellSlotsViewController: UITableViewDataSource {
     cellForRowAt indexPath: IndexPath) -> UITableViewCell
   {
     var cell: UITableViewCell!
-    if indexPath.row == rowData.count {
+    if indexPath.row == rowEntries.count {
       // If we are loading the last row and we are in edit mode, show the 'ADD ROW' row.
       cell = addRowCell(forTableView: tableView)
     } else {
