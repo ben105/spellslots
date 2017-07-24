@@ -9,6 +9,7 @@ protocol SpellSlotsCellDelegate: class {
   func spellSlotsCell(cell: SpellSlotsTableViewCell, didChangeTitle toTitle: String)
   func spellSlotsCell(cell: SpellSlotsTableViewCell, changedTotalSlots toSlots: UInt)
   func spellSlotsCell(cell: SpellSlotsTableViewCell, changedCompletedSlots toSlots: UInt)
+  func deleteSpellSlotsCell(cell: SpellSlotsTableViewCell)
 }
 
 class SpellSlotsTableViewCell: UITableViewCell {
@@ -167,6 +168,9 @@ class SpellSlotsTableViewCell: UITableViewCell {
           animationDuration: info.animationDuration,
           animationCurve: info.animationCurve)
     }
+
+    let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(tryToDelete))
+    self.addGestureRecognizer(recognizer)
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -175,6 +179,10 @@ class SpellSlotsTableViewCell: UITableViewCell {
 
   deinit {
     NotificationCenter.default.removeObserver(self)
+  }
+
+  @objc fileprivate func tryToDelete() {
+    delegate?.deleteSpellSlotsCell(cell: self)
   }
 }
 

@@ -98,6 +98,7 @@ class CollectionViewModel:
       delegate?.didChangeTotalSlots(toSlots: numberOfSlots)
       if slotCompleteIndex >= indexPath.row {
         slotCompleteIndex = indexPath.row - 1
+        delegate?.didChangeCompletedSlots(toSlots: UInt(slotCompleteIndex + 1))
       }
       collectionView.reloadData()
       return
